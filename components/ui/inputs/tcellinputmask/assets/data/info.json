@@ -1,0 +1,10 @@
+{
+    "name": "tcellinputmask",
+    "version": "0.0.1",
+    "description": "Turkcell input mask bileşeni.",
+    "keywords": "input,mask",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1",
+        "tcellinput": "^0.0.1"
+    }
+}

@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellAvatar",
+        "desc": "Avatar Turkcell Component",
+        "sample": ""
+    },
+    {
+        "name": "Props",
+        "infoArray" : [ 
+
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

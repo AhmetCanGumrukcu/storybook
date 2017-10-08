@@ -1,0 +1,9 @@
+{
+    "name": "tcellavatar",
+    "version": "0.0.1",
+    "description": "Turkcell avatar base bileşeni.",
+    "keywords": ["avatar"],
+    "dependencies": {
+        "tcellcomponent" : "^0.0.1"
+    }
+}

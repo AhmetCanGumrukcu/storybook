@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellButton",
+        "desc": "IconButton Turkcell Component",
+        "sample": " "
+    },
+    {
+        "name": "Props",
+        "infoArray" : [
+           
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

@@ -1,0 +1,9 @@
+{
+    "name": "tcelldatagrid",
+    "version": "0.0.1",
+    "description": "Turkcell grid bileşeni.",
+    "keywords": "grid,base",
+    "dependencies": {       
+        "tcellcomponent" : "^0.0.1"
+    }
+}

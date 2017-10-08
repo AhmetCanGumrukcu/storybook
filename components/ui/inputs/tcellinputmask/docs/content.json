@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellInputMask",
+        "desc": "Input Turkcell Component",
+        "sample": ""
+    },
+    {
+        "name": "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+          
+        ]
+    }
+]

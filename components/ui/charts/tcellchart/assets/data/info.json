@@ -1,0 +1,9 @@
+{
+    "name": "tcellchart",
+    "version": "0.0.1",
+    "description": "Turkcell Chart bileşeni.",
+    "keywords": "charts",
+    "dependencies": {
+        "t-component" : "^0.0.1"
+    }
+}

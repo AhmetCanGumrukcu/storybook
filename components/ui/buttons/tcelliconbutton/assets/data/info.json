@@ -1,0 +1,9 @@
+{
+    "name":"tcelliconbutton",
+    "version": "0.0.1",
+    "description": "Turkcell icon button bileşeni.",
+    "keywords": "icon,button",
+    "dependencies": {
+        "tcellcomponent" : "^0.0.1"
+    }
+}

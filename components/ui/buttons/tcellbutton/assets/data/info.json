@@ -1,0 +1,9 @@
+{
+    "name":"tcellbutton",
+    "version": "0.0.1",
+    "description": "Turkcell button bileşeni.",
+    "keywords": "button",
+    "dependencies": {       
+        "tcellcomponent" : "^0.0.1"       
+    }
+}

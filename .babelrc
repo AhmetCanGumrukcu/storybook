@@ -1,0 +1,25 @@
+{
+  "presets": ["es2015", "stage-0", "react"],
+  "plugins":[
+    ["babel-plugin-module-alias",[
+        {"src": "./components/tcellcomponent", "expose": "tcellcomponent"},
+        {"src": "./components/ui/avatar/tcellavatar", "expose": "tcellavatar"},
+        {"src": "./components/ui/buttons/tcelliconbutton", "expose": "tcelliconbutton"},
+        {"src": "./components/ui/buttons/tcellbutton", "expose": "tcellbutton"},
+        {"src": "./components/ui/charts/tcellchart", "expose": "tcellchart"},
+        {"src": "./components/ui/inputs/tcellinput", "expose": "tcellinput"},
+        {"src": "./components/ui/inputs/tcellinputmask", "expose": "tcellinputmask"},
+        {"src": "./components/ui/datagrid/tcelldatagrid", "expose": "tcelldatagrid"},
+        {"src": "./components/ui/inputs/tcellselectfield", "expose": "tcellselectfield"},
+        {"src": "./components/ui/inputs/tcellselectmultiple", "expose": "tcellselectmultiple"},
+        {"src": "./components/ui/layout/tcellhorizontalform", "expose": "tcellhorizontalform"},
+        {"src": "./components/ui/tcelldatafieldbutton", "expose": "tcelldatafieldbutton"},
+        {"src": "./components/ui/inputs/tcellcheckbox", "expose": "tcellcheckbox"},
+        {"src": "./components/ui/inputs/tcellradiogroup", "expose": "tcellradiogroup"},
+        {"src": "./components/ui/tcellcard", "expose": "tcellcard"},
+        {"src": "./components/ui/tcelldialog", "expose": "tcelldialog"},
+        {"src": "./components/ui/tcelldatetimepicker", "expose": "tcelldatetimepicker"}
+      ]
+    ]
+  ]
+}

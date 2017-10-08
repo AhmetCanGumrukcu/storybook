@@ -1,0 +1,13 @@
+﻿{
+  "files": [
+    "LICENSE",
+    "index.js"
+  ],
+  "main": "index.js",
+  "author": {
+    "name": "Turkcell Team",
+    "email": "nems@turkcell.com",
+    "url": "http://www.turkcell.com"
+  },
+  "license": "Turkcell"
+}
