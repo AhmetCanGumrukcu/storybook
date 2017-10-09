@@ -68,6 +68,7 @@
   -webkit-transition: 200ms ease opacity;
   transition: 200ms ease opacity;
   will-change: opacity;
+  z-index: 99;
 }
 
 #date-time-picker .c-scrim--shown {
@@ -109,6 +110,7 @@
 #date-time-picker .c-datepicker--open {
   opacity: 1;
   top: 50%;
+  z-index: 9999;
 }
 
 #date-time-picker .c-datepicker__header {
