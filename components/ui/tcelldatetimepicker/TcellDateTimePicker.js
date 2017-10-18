@@ -18,7 +18,7 @@ class ReadOnlyTextField extends TcellComponent {
 }
 
 class TcellDateTimePicker extends TcellComponent {
-    constructor(props) {
+    constructor(props) {       
         super(props);
         if (props.value) {
             this.state = this.acquireDateTime(props.value);
@@ -44,6 +44,7 @@ class TcellDateTimePicker extends TcellComponent {
         let actualDisplay = "";
         let value = null;
         let monthInt = null;
+       
         switch (event.state.month) {
             case "Ocak":
                 monthInt = "01";
@@ -160,7 +161,7 @@ class TcellDateTimePicker extends TcellComponent {
         });
     };
 
-    acquireDateTime(value) {
+    acquireDateTime(value) {      
         let tempDate = moment(value);
         var formattedDate = "";
         if (this.props.showClock) {
@@ -169,7 +170,8 @@ class TcellDateTimePicker extends TcellComponent {
         else {
             formattedDate = tempDate.format("DD MMM YYYY");
         }
-        return {
+
+        let returnValue = {
             display: formattedDate,
             rawday: tempDate.format("DD"),
             rawhours: tempDate.format("HH"),
@@ -178,11 +180,13 @@ class TcellDateTimePicker extends TcellComponent {
             rawweekday: tempDate.format("dddd"),
             rawyear: tempDate.format("YYYY")
         };
+
+        return returnValue;
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {       
         if (this.props.value != nextProps.value && nextProps.value) {
-            const { value } = nextProps;
+            const { value } = nextProps; 
             this.setState(this.acquireDateTime(value));
         }
         else if (this.props.value != nextProps.value && !nextProps.value) {

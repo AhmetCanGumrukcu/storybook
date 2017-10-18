@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("prop-types"), require("material-ui/Button"), require("material-ui/Dialog"), require("tcellcomponent"), require("lodash/isFunction"));
+		module.exports = factory(require("react"), require("prop-types"), require("tcellcomponent"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "prop-types", "material-ui/Button", "material-ui/Dialog", "tcellcomponent", "lodash/isFunction"], factory);
+		define(["react", "prop-types", "tcellcomponent"], factory);
 	else if(typeof exports === 'object')
-		exports["tcelldialog"] = factory(require("react"), require("prop-types"), require("material-ui/Button"), require("material-ui/Dialog"), require("tcellcomponent"), require("lodash/isFunction"));
+		exports["tcellform"] = factory(require("react"), require("prop-types"), require("tcellcomponent"));
 	else
-		root["tcelldialog"] = factory(root["react"], root["prop-types"], root["material-ui/Button"], root["material-ui/Dialog"], root["tcellcomponent"], root["lodash/isFunction"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__) {
+		root["tcellform"] = factory(root["react"], root["prop-types"], root["tcellcomponent"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,60 +81,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-
-var _TcellDialog = __webpack_require__(1);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_TcellDialog).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(2);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(3);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Button = __webpack_require__(4);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _Dialog = __webpack_require__(5);
-
-var _Dialog2 = _interopRequireDefault(_Dialog);
-
-var _tcellcomponent = __webpack_require__(6);
-
-var _isFunction = __webpack_require__(7);
-
-var _isFunction2 = _interopRequireDefault(_isFunction);
+var _tcellcomponent = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -142,103 +104,81 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TcellDialog = function (_TcellComponent) {
-  _inherits(TcellDialog, _TcellComponent);
+var TcellForm = function (_TcellComponent) {
+    _inherits(TcellForm, _TcellComponent);
 
-  function TcellDialog() {
-    _classCallCheck(this, TcellDialog);
+    function TcellForm(props) {
+        _classCallCheck(this, TcellForm);
 
-    return _possibleConstructorReturn(this, (TcellDialog.__proto__ || Object.getPrototypeOf(TcellDialog)).apply(this, arguments));
-  }
+        var _this = _possibleConstructorReturn(this, (TcellForm.__proto__ || Object.getPrototypeOf(TcellForm)).call(this, props));
 
-  _createClass(TcellDialog, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          value = _props.value,
-          children = _props.children,
-          name = _props.name,
-          cancel = _props.cancel,
-          ok = _props.ok,
-          title = _props.title,
-          other = _objectWithoutProperties(_props, ['value', 'children', 'name', 'cancel', 'ok', 'title']);
-
-      var dialogContent = undefined;
-
-      var contentChildren = children[0].props.children;
-      if ((0, _isFunction2.default)(contentChildren)) {
-        dialogContent = _react2.default.createElement(contentChildren);
-      } else {
-        dialogContent = contentChildren;
-      }
-
-      var actionsChildren = children[1].props.children;
-
-      return _react2.default.createElement(
-        _Dialog2.default,
-        _extends({
-          ignoreBackdropClick: true,
-          ignoreEscapeKeyUp: true
-        }, other),
-        _react2.default.createElement(
-          _Dialog.DialogTitle,
-          null,
-          title
-        ),
-        _react2.default.createElement(
-          _Dialog.DialogContent,
-          null,
-          dialogContent
-        ),
-        _react2.default.createElement(
-          _Dialog.DialogActions,
-          null,
-          actionsChildren
-        )
-      );
+        _this.onChange = _this.onChange.bind(_this);
+        _this.updateProperty = _this.updateProperty.bind(_this);
+        _this.clear = _this.clear.bind(_this);
+        return _this;
     }
-  }]);
 
-  return TcellDialog;
+    _createClass(TcellForm, [{
+        key: 'updateProperty',
+        value: function updateProperty(key, value) {
+            if (this.props.model.fields.has(key)) {
+                this.props.model.$(key).set('value', value);
+                this.props.model.validate(key, { showErrors: true });
+            }
+        }
+    }, {
+        key: 'onChange',
+        value: function onChange(event) {
+            this.updateProperty(event.target.name, event.target.value);
+        }
+    }, {
+        key: 'clear',
+        value: function clear() {
+            if (this.props.model) {
+                this.props.model.clear();
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var children = this.props.children;
+
+            return _react2.default.createElement(
+                'form',
+                { onSubmit: function onSubmit(e) {
+                        e.preventDefault();
+                    } },
+                children
+            );
+        }
+    }]);
+
+    return TcellForm;
 }(_tcellcomponent.TcellComponent);
 
-exports.default = TcellDialog;
+TcellForm.propTypes = {
+    model: _propTypes2.default.any
+};
+
+exports.default = TcellForm;
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("material-ui/Button");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("material-ui/Dialog");
-
-/***/ }),
-/* 6 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("tcellcomponent");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash/isFunction");
 
 /***/ })
 /******/ ]);

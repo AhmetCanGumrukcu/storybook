@@ -1,0 +1,9 @@
+{
+    "name": "tcellmdlgrid",
+    "version": "0.0.1",
+    "description": "Turkcell mdl grid bileşeni.",
+    "keywords": "form",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}

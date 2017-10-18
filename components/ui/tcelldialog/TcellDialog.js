@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import { TcellComponent } from 'tcellcomponent'
-import _ from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 class TcellDialog extends TcellComponent {
+
   render() {
     const { value, children, name, cancel, ok, title, ...other } = this.props;
     let dialogContent = undefined;
    
     const contentChildren = children[0].props.children;    
-    if(_.isFunction(contentChildren)){
+    if(isFunction(contentChildren)){
       dialogContent = React.createElement(contentChildren);      
     }else{      
       dialogContent = contentChildren;

@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellMdlGrid",
+        "desc": "Turkcell mdl grid component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

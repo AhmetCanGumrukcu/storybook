@@ -1,0 +1,9 @@
+{
+    "name": "tcellform",
+    "version": "0.0.1",
+    "description": "Turkcell form bileşeni.",
+    "keywords": "form",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}

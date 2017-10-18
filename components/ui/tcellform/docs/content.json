@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellForm",
+        "desc": "Turkcell Form Component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]
