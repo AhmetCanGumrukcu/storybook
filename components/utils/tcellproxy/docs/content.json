@@ -1,0 +1,19 @@
+[
+    {
+        "name": "ServiceProxy",
+        "desc": "Proxy Service Call",
+        "sample": ""
+    },
+    {
+        "name": "Props",
+        "infoArray" : [ 
+
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

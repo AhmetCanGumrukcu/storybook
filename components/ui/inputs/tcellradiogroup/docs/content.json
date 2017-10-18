@@ -1,0 +1,19 @@
+[
+    {
+        "name": "tcellradiogroup",
+        "desc": "TcellRadiogroup Turkcell Component",
+        "sample": " "
+    },
+    {
+        "name": "Props",
+        "infoArray" : [
+           
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

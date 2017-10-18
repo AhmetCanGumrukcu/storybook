@@ -1,0 +1,9 @@
+{
+    "name":"tcelldatetimepicker",
+    "version": "0.0.1",
+    "description": "Turkcell datetime picker bileşeni.",
+    "keywords": "date time picker",
+    "dependencies": {       
+        "tcellcomponent" : "^0.0.1"       
+    }
+}

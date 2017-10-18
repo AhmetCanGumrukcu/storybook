@@ -1,0 +1,27 @@
+{
+    "name": "tcellselectmultiple",
+    "version": "0.0.1",
+    "description": "Turkcell select multiple bileşeni.",
+    "keywords": "select multiple",
+    "dependencies": {
+        "tcellcomponent": "^0.0.1",
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1"
+    },
+    "files": [
+        "LICENSE",
+        "assets",
+        "src",
+        "index.js",
+        "index.d.ts",
+        "README.md"
+    ],
+    "main": "index.js",
+    "author": {
+        "name": "Turkcell Team",
+        "email": "nems@turkcell.com",
+        "url": "http://www.turkcell.com"
+    },
+    "license": "Turkcell",
+    "typings": "./index.d.ts"
+}

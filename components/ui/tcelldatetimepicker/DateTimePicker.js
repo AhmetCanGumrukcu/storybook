@@ -34,18 +34,18 @@ export class DateTimePicker extends TcellComponent {
     constructor(props) {     
         super(props);
         this.displayName = "DataTimePicker";
-        this.name = props.name,
+        this.name = props.name;
         this.state = {
-            day:          moment().format("DD"),
-            hours:        moment().format("HH"),
-            minutes:      moment().format("mm"),
-            month:        moment().format("MMMM"),           
+            day:          props.day || moment().format("DD"),
+            hours:        props.hours || moment().format("HH"),
+            minutes:      props.minutes || moment().format("mm"),
+            month:        props.month || moment().format("MMMM"),           
             show:         true,
             showCalendar: true,
             showClock:    false,
             type:         true,
-            weekday:      moment().format("dddd"),
-            year:         moment().format("YYYY")
+            weekday:      props.weekday || moment().format("dddd"),
+            year:         props.year || moment().format("YYYY")
         };
     }
 
@@ -74,8 +74,7 @@ export class DateTimePicker extends TcellComponent {
 
     _checkProp = (name, props) => {
         let result = this.state;
-
-        if (this.props.hasOwnProperty(name) && this.props[name] != undefined) {
+        if (this.props.hasOwnProperty(name) && !this.props[name]) {
             result[name] = props;
             this.setState(result);
         }
@@ -87,7 +86,6 @@ export class DateTimePicker extends TcellComponent {
                 type: type
             });
         };
-
         this._checkFunc('handleChangeType', { type: type }, f);
     };
 
@@ -170,12 +168,7 @@ export class DateTimePicker extends TcellComponent {
         this._checkFunc('clickOnOK', {}, f);
     };
 
-    componentDidMount() {
-        this._props2state();
-    }
-
     componentWillReceiveProps(nextProps) {
-        debugger
         this._props2state(nextProps);
     }
 

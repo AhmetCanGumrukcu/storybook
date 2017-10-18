@@ -3,21 +3,25 @@ import TcellDateTimePicker from 'tcelldatetimepicker'
 import TcellButton from 'tcellbutton'
 
 export default class DateTimeViewer extends React.Component {
-    constructor(props) {
-        debugger
+    constructor(props) {       
         super(props);
         this.state = {
-            value: null,
+            dateValue: null,
             dateTimeValue: null
         }
+        this.handleDateValueChange = this.handleDateValueChange.bind(this);
+        this.handleDateTimeValueChange = this.handleDateTimeValueChange.bind(this);
     }
 
-    handleValueChange = (event) =>{   
-        debugger         
-        this.setState({value: event.target.value});
+    handleDateValueChange(event) {             
+        this.setState({
+            dateValue: event.target.value            
+        });
     }
-    handleDateTimeValueChange = (event) =>{            
-        this.setState({dateTimeValue: event.target.value});
+    handleDateTimeValueChange(event) {                
+        this.setState({
+            dateTimeValue: event.target.value           
+        });
     }
 
     render() {
@@ -32,20 +36,20 @@ export default class DateTimeViewer extends React.Component {
                                 <label style={{ marginTop: tenpx }}>Basic date picker:</label>
                             </td>
                             <td style={{ paddingTop: tenpx, paddingBottom: tenpx, paddingLeft: tenpx }}>
-                                <TcellDateTimePicker 
+                                <TcellDateTimePicker
                                     label="Order Date"
                                     name="ORDER_DATE"
                                     showCalendar={true}
                                     showClock={false}
-                                    onChange={ this.handleValueChange }
-                                    value={this.state.value}
+                                    onChange={ this.handleDateValueChange }
+                                    value={this.state.dateValue}
                                 />
                             </td>
                             <td style={{ paddingTop: tenpx, paddingBottom: tenpx, paddingLeft: tenpx }}>
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => { debugger; this.setState({ value: "1971-04-25" }) }}
+                                    onClick={() => { this.setState({ dateValue: "1971-04-25" }) }}
                                     style={{ marginRight: '10px' }}>
                                     Set Date
                                 </TcellButton>
@@ -54,7 +58,7 @@ export default class DateTimeViewer extends React.Component {
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => {debugger; console.log(this.state.value); }}
+                                    onClick={() => {console.log(this.state.dateValue); }}
                                     style={{ marginRight: '10px' }}>
                                     Show Date
                                 </TcellButton>
@@ -63,7 +67,7 @@ export default class DateTimeViewer extends React.Component {
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => { debugger; this.setState({ value: null }) }}
+                                    onClick={() => { this.setState({ dateValue: null }) }}
                                     style={{ marginRight: '10px' }}>
                                     Clear
                                 </TcellButton>
@@ -87,7 +91,7 @@ export default class DateTimeViewer extends React.Component {
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => { debugger; this.setState({ dateTimeValue: "1998-09-12 13:45" }) }}
+                                    onClick={() => { this.setState({ dateTimeValue: "1998-09-12 13:45" }) }}
                                     style={{ marginRight: '10px' }}>
                                     Set DateTime
                                 </TcellButton>
@@ -96,7 +100,7 @@ export default class DateTimeViewer extends React.Component {
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => {debugger; console.log(this.state.dateTimeValue); }}
+                                    onClick={() => { console.log(this.state.dateTimeValue); }}
                                     style={{ marginRight: '10px' }}>
                                     Show DateTime
                                 </TcellButton>
@@ -105,7 +109,7 @@ export default class DateTimeViewer extends React.Component {
                                 <TcellButton
                                     type="raised"
                                     color="primary"
-                                    onClick={() => { debugger; this.setState({ dateTimeValue: null }) }}
+                                    onClick={() => { this.setState({ dateTimeValue: null }) }}
                                     style={{ marginRight: '10px' }}>
                                     Clear
                                 </TcellButton>

@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellDialog",
+        "desc": "Turkcell Dialog Component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

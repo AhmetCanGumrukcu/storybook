@@ -10,7 +10,7 @@ export class InputAdapter extends Component {
         caretPosition: PropTypes.number.isRequired,
         onChange: PropTypes.func.isRequired,
     }
-    componentDidMount() {
+    componentDidMount() {       
         this._setCaretPosition();
     }
     componentDidUpdate() {
@@ -35,10 +35,12 @@ export class InputAdapter extends Component {
         this.input = ref;
     };
     _onChange = (event) => {
+       
         event.persist();
         this.props.onChange(event);
     };
     render() {
+       
         const {caretPosition, onChange, ...rest} = this.props;
         return <Input ref={this._getRef} type="text" onChange={this._onChange} {...rest} />;
     }

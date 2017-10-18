@@ -4,9 +4,27 @@ import TextField from 'material-ui/TextField'
 import { TcellComponent } from 'tcellcomponent'
 
 export class TcellInput extends TcellComponent {    
-    render() {
+
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){       
+        if(this.props.onChange){
+            this.props.onChange({
+                target:{
+                    name: event.target.name,
+                    value: event.target.value
+                }
+            });
+        }
+    }
+
+    render() { 
+        const { onChange, ...others } = this.props;
         return (
-            <TextField {...this.props} />
+            <TextField onChange={ this.handleChange } { ...others } />
         );
     }
 }

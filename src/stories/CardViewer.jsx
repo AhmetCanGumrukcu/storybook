@@ -3,10 +3,10 @@ import TcellCard from 'tcellcard'
 
 export default class CardViewer extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            expanded: null
+        this.state = {
+            expanded: true
         }
     }
 
@@ -66,10 +66,8 @@ export default class CardViewer extends React.Component {
                                     title="Card..."
                                     subtitle="collapsible..."
                                     expandable={true}
-                                    expanded={ this.state.expanded }
-                                    onExpandClick = {()=> this.setState({
-                                        expanded: !this.state.expanded
-                                    })}
+                                    expanded={false}
+                                    
                                 >
                                     <p>
                                         Hello from storybook card...

@@ -14,7 +14,12 @@ const styles = {
 
 class TcellCheckbox extends TcellComponent {
 
-    handleChange = (event, selected) => {
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event, selected){      
         let myEvent = {
             target: {
                 name: event.target.name,
@@ -27,7 +32,7 @@ class TcellCheckbox extends TcellComponent {
         }
     };
     render() {
-        const { classes, value, label, onChange, helperText, ...others } = this.props;
+        const { classes, value, label, onChange, helperText, onToggle, error, ...others } = this.props;
         return (
             <FormControlLabel
                 control={
@@ -37,7 +42,7 @@ class TcellCheckbox extends TcellComponent {
                         { ...others }
                     />
                 }
-                label={label}
+                label={ label }               
             />
         );
     }

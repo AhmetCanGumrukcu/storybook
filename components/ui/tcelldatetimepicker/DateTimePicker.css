@@ -136,7 +136,6 @@
 
 #date-time-picker .c-datepicker__header-date {
   background: #2196f3;
-  height: 150px;
   padding: 16px 0;
 }
 
@@ -244,12 +243,12 @@
 }
 
 #date-time-picker .c-datepicker__header-date__day {
-  font-size: 64px;
+  font-size: 24px;
   opacity: 0.6;
 }
 
 #date-time-picker .c-datepicker__header-date__time {
-  font-size: 25px;
+  font-size: 24px;
   opacity: 0.6;
 }
 

@@ -32,22 +32,11 @@ const styles = theme => ({
     }
 });
 
-class TcellCard extends TcellComponent {
-    constructor(props) {
-        super(props);
-        this.handleExpandClick = this.handleExpandClick.bind(this);
-    }
-
-    handleExpandClick() {
-        if (this.props.onExpandClick) {
-            this.props.onExpandClick();
-        }
-    };
-
+class TcellCard1 extends TcellComponent {
     showExpansionIcon = () => {
         if (this.props.expandable) {
             return <IconButton className={classnames(this.props.classes.expand, { [this.props.classes.expandOpen]: this.props.expanded })}
-                onClick={this.handleExpandClick}
+                onClick={this.props.onClick}
                 aria-expanded={this.props.expanded}
                 aria-label="Show more">
                 <ExpandMoreIcon />
@@ -55,7 +44,7 @@ class TcellCard extends TcellComponent {
         }
     }
 
-    getContent = () => {        
+    getContent = () => {
         if (this.props.expandable) {
             return <Collapse in={this.props.expanded} transitionDuration="auto" >
                 <CardContent>
@@ -64,14 +53,14 @@ class TcellCard extends TcellComponent {
             </Collapse>
         } else {
             return <CardContent>
-                        {this.props.children}
-                    </CardContent>
+                {this.props.children}
+            </CardContent>
         }
     }
 
     render() {
         const { raised, classes, title, subtitle, name } = this.props;
-       
+
         return (
             <Card raised={raised} classes={{ root: classes.root }}>
                 <CardHeader
@@ -81,20 +70,72 @@ class TcellCard extends TcellComponent {
                     title={<div className={classes.flexContainer}>
                         <span>{title}</span>
                         <div className={classes.flexGrow} />
-                        { this.showExpansionIcon() }
+                        {this.showExpansionIcon()}
                     </div>
                     }
                     subheader={subtitle}
                 />
-                { this.getContent() }
+                {this.getContent()}
             </Card>
 
         );
     }
 }
 
+class TcellCard extends TcellComponent {
+    constructor(props) {
+        super(props);
+        this.handleExpandClick = this.handleExpandClick.bind(this);
+        if (props.viewStoreObject) {                    
+            this.state = {
+                expanded: props.viewStoreObject.expanded
+            }
+        } else {
+            this.state = {
+                expanded: props.expanded
+            }
+        }
+    }
+
+    maintainViewState(viewStoreObject, expanded) {    
+        if (viewStoreObject) {
+            viewStoreObject["expanded"] = expanded ? true : false;
+        }
+    }
+
+    componentWillMount() {      
+        const { viewStoreObject } = this.props;
+        if (viewStoreObject) {
+            this.setState({ expanded: viewStoreObject.expanded ? true : false });
+        }
+    }
+
+    handleExpandClick() {
+    
+        const { viewStoreObject } = this.props;
+        let newState = !this.state.expanded;
+
+        this.setState({ expanded: newState }, this.maintainViewState(viewStoreObject, newState));
+    };
+
+    decideExpanded() {
+        const { expanded, onClick, ...others } = this.props;
+        return <TcellCard1
+            expanded={this.state.expanded}
+            onClick={this.handleExpandClick}
+            { ...others }>
+        </TcellCard1>
+    }
+    render() {
+        return (
+            this.decideExpanded()
+        );
+    }
+}
+
+
+
 TcellCard.propTypes = {
-    name: PropTypes.string.isRequired,
     raised: PropTypes.bool,
     expanded: PropTypes.bool,
     title: PropTypes.string,
@@ -105,7 +146,6 @@ TcellCard.propTypes = {
 
 TcellCard.defaultProps = {
     raised: false,
-    expanded: false,
     title: 'Title is here...',
     expandable: false,
     subtitle: ''

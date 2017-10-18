@@ -8,7 +8,7 @@ import SearchIcon from 'material-ui-icons/Search';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import { TcellComponent } from 'tcellcomponent'
-import _ from 'lodash';
+import filter from 'lodash/filter';
 import style from './style.css'
 
 const styles = theme => ({
@@ -17,34 +17,21 @@ const styles = theme => ({
     }
 });
 
-class ReadOnlyTextField extends Component {
+class ReadOnlyTextField extends TcellComponent {
     render() {
-        return (
-            <TextField { ...this.props }></TextField>
-        )
+      const { value, ...others } = this.props;
+      return (
+        <TextField value={ value ? value : '' } { ...others }></TextField>
+      )
     };
-}
+  }
 class TcellDataFieldButton extends TcellComponent {
     constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
+        super(props);       
         this.handleClick = this.handleClick.bind(this);
-        this.state = {
-            value: undefined,
-            display: undefined
+        this.state = {           
+            display: null
         };
-    }
-
-   
-
-    handleChange(event) {
-        event.preventDefault();
-        event.stopPropagation();      
-        if (this.props.dataSource && this.props.dataSource.length > 0) {
-            return;
-        } else {
-            this.props.onChange(event);
-        }
     }
 
     handleClick() {
@@ -52,27 +39,19 @@ class TcellDataFieldButton extends TcellComponent {
     }
 
     setDisplayFromDatasource(dataSource, id) {
-        if (dataSource && dataSource.length > 0) {
-            let found = _.filter(dataSource, (item) => item.id === id);
-            this.state.display = found && found.length > 0 ? found[0].text : undefined;
-        } else {
-            this.setState({ display: id });
+        let display = null;
+        if (id && dataSource && dataSource.length > 0) {
+            let found = filter(dataSource, (item) => item.id === id);
+            display = found && found.length > 0 ? found[0].text : null
+        } else if (id) {
+            display = id;
         }
-        //todo
-        setTimeout(() => {
-            let oldVal = this.state.display;
-            this.setState({
-                display: oldVal
-            });           
-        }, 50)
+        this.setState({ display: !display ? '' : display })
+
     }
     componentDidMount() {
-        const { dataSource, value } = this.props;
-        this.setState({
-            value: this.props.value
-        });
+        const { dataSource, value } = this.props;      
         this.setDisplayFromDatasource(dataSource, value)
-
         let inputNode = ReactDOM.findDOMNode(this.textField);
         let inputs = inputNode.querySelectorAll('input');
         try {
@@ -85,25 +64,19 @@ class TcellDataFieldButton extends TcellComponent {
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.value != nextProps.value) {
-            const { dataSource } = this.props;
-            const { value } = nextProps;
-            this.setState({
-                value: value
-            });
-            this.setDisplayFromDatasource(dataSource, value)
+            const { dataSource } = this.props;          
+            this.setDisplayFromDatasource(dataSource, nextProps.value)
         }
     }
     render() {
-        const { onChange, onClick, value, dataSource, classes, ...others } = this.props;
+        const { onClick, value, dataSource, classes, ...others } = this.props;
 
         return (
             <ListItem classes={{ root: classes.root }}>
                 <ReadOnlyTextField ref={(r) => { this.textField = r }}
-                value={this.state.display} onChange={this.handleChange} readOnly  { ...others }>
+                    value={this.state.display}  { ...others }>
                 </ReadOnlyTextField>
-                <IconButton onClick={this.handleClick} aria-label="Search" className={style.iconButton}>
-                    <SearchIcon />
-                </IconButton>
+                <SearchIcon onClick ={ this.handleClick } />               
             </ListItem>
         );
     };

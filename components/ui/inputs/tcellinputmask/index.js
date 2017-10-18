@@ -8,35 +8,55 @@ import Input from 'material-ui/Input'
 export class TcellInputMask extends TcellComponent {
     constructor(props) {
         super(props);
-        this.state={ maskedValue: this.props.maskedValue };
-        this.onChange = this.onChange.bind(this);
+        //this.state={ maskedValue: this.props.maskedValue };
+        this.state = { maskedValue: this.props.value };
+        //this.onChange = this.onChange.bind(this);
     }
 
-    onChange(event) {
-        this.setState({maskedValue: event.target.value});
-        if(this.props.onChange) {
-            this.props.onChange(event.target.value);
+    // onChange(event) {
+    //     this.setState({maskedValue: event.target.value});
+    //     if(this.props.onChange) {
+    //         this.props.onChange(event.target.value);
+    //     }
+    // }
+    componentWillReceiveProps(nextProps) {
+       debugger
+        if (this.props.value != nextProps.value) {           
+            if(this.props.onChange){
+                this.props.onChange({
+                    target: {
+                        value: nextProps.value,
+                        name: this.props.name
+                    }
+                });
+            }
         }
     }
 
+    componentWillMount(){
+        
+    }
+
     render() {
-        const { mask, onChange, isSpacesIncluded, filterOutChars,  ...rest } = this.props;
+        const { mask, onChange, isSpacesIncluded, filterOutChars, ...rest } = this.props;
         return (
             <TextMask
                 {...rest}
                 Component={InputAdapter}
-                value={this.state.maskedValue}
+                value={this.props.value}
                 mask={this.props.mask}
-                onChange={this.onChange}
+                onChange={this.props.onChange}
             />
         );
     }
 }
 
 TcellInputMask.propTypes = {
+    name: PropTypes.string,
     autoFocus: PropTypes.bool,
     inputComponent: PropTypes.func,
-    maskedValue: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
+    maskedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    rawValue: PropTypes.any,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.bool,

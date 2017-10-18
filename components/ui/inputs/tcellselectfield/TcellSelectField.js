@@ -7,7 +7,7 @@ import  { ListItem } from 'material-ui/List';
 import ArrowDropDownIcon from 'material-ui-icons/ArrowDropDown';
 import IconButton from 'material-ui/IconButton';
 import { TcellComponent } from 'tcellcomponent'
-import _ from 'lodash';
+import filter from 'lodash/filter';
 
 const styles = theme => ({
     root: {
@@ -17,24 +17,25 @@ const styles = theme => ({
 
 class ReadOnlyTextField extends TcellComponent {
   render() {
+    const { value, ...others } = this.props;
     return (
-      <TextField { ...this.props }></TextField>
+      <TextField value={ value ? value : '' } { ...others }></TextField>
     )
   };
 }
 
-class TcellSelectField extends Component {
+class TcellSelectField extends TcellComponent {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
     this.state = {
-      anchorEl: undefined,
+      anchorEl: null,
       open: false,
-      display: undefined
+      display: null
     };
   }  
 
-  handleClick(event) {
+  handleClick = (event) => {
     this.setState({
       open: true,
       anchorEl: event.currentTarget
@@ -47,7 +48,7 @@ class TcellSelectField extends Component {
     })
   };
 
-  handleMenuItemClick = param => {
+  handleMenuItemClick = (param) => {
     let myEvent = {
       target: {
         name: this.props.name,
@@ -62,28 +63,23 @@ class TcellSelectField extends Component {
   }
 
   setDisplayFromDatasource(dataSource, id) {
-    if (dataSource && dataSource.length > 0) {
-      let found = _.filter(dataSource, (item) => item.id === id);
-
+    if(!id){
       this.setState({
-        display: found && found.length > 0 ? found[0].text : undefined 
+        display: null 
       });
-
+    } else if (dataSource && dataSource.length > 0) {
+      let found = filter(dataSource, (item) => item.id === id);
+      this.setState({
+        display: found && found.length > 0 ? found[0].text : null 
+      });
     } else {
       this.setState({
         display: id        
       });      
     }
-    //todo
-    setTimeout(() => {
-      let oldVal = this.compState.display;
-      this.setState({
-        display: oldVal
-      });
-    }, 50)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {   
     if (this.props.value != nextProps.value) {
       const { dataSource } = this.props;
       const { value } = nextProps;
@@ -94,17 +90,44 @@ class TcellSelectField extends Component {
     }
   }
   componentDidMount() {
+    const { dataSource, value } = this.props;
     let inputNode = ReactDOM.findDOMNode(this.textField);
-    let inputs = inputNode.querySelectorAll('input');
-    try {
-      for (let i = 0; i < inputs.length; i++) {
-        inputs[i].setAttribute('readonly', 'readonly')
-      }
-    } catch (e) {
-      alert(e);
+    let inputs = inputNode.querySelectorAll('input');   
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].setAttribute('readonly', 'readonly')
     }
-  }
 
+    const firstDiv = this.getClosestUp(inputNode, 'div');
+    const secondDiv = this.getClosestUp(firstDiv, 'div'); 
+    if(secondDiv) secondDiv.style.paddingTop = "3px";   
+
+    this.setDisplayFromDatasource(dataSource, value)
+
+  }
+  getClosestUp = function(elem, selector) {
+    // Element.matches() polyfill
+    if (!Element.prototype.matches) {
+        Element.prototype.matches =
+            Element.prototype.matchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.oMatchesSelector ||
+            Element.prototype.webkitMatchesSelector ||
+            function (s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+                while (--i >= 0 && matches.item(i) !== this) { }
+                return i > -1;
+            };
+    }
+
+    // Get closest match
+    for (; elem && elem !== document; elem = elem.parentNode) {
+        if (elem.matches(selector)) return elem;
+    }
+
+    return null;
+}
   render() {
     const { dataSource, onChange, value, classes, ...others } = this.props;
 

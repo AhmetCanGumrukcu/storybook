@@ -1,0 +1,8 @@
+{
+    "name": "tcellproxy",
+    "version": "0.0.1",
+    "description": "Turkcell rest service call proxy.",
+    "keywords": ["proxy","tcellproxy"],
+    "dependencies": {
+    }
+}

@@ -18,7 +18,8 @@
         {"src": "./components/ui/inputs/tcellradiogroup", "expose": "tcellradiogroup"},
         {"src": "./components/ui/tcellcard", "expose": "tcellcard"},
         {"src": "./components/ui/tcelldialog", "expose": "tcelldialog"},
-        {"src": "./components/ui/tcelldatetimepicker", "expose": "tcelldatetimepicker"}
+        {"src": "./components/ui/tcelldatetimepicker", "expose": "tcelldatetimepicker"},
+        {"src": "./components/utils/componenthelper", "expose": "componenthelper"}            
       ]
     ]
   ]

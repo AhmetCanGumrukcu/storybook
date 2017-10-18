@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("prop-types"));
+		module.exports = factory(require("react"), require("prop-types"), require("device.js/dist/device.es"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "prop-types"], factory);
+		define(["react", "prop-types", "device.js/dist/device.es"], factory);
 	else if(typeof exports === 'object')
-		exports["tcellcomponent"] = factory(require("react"), require("prop-types"));
+		exports["tcellcomponent"] = factory(require("react"), require("prop-types"), require("device.js/dist/device.es"));
 	else
-		root["tcellcomponent"] = factory(root["react"], root["prop-types"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__) {
+		root["tcellcomponent"] = factory(root["react"], root["prop-types"], root["device.js/dist/device.es"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -97,6 +97,8 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _device = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -149,6 +151,11 @@ var TcellComponent = exports.TcellComponent = function (_Component) {
         value: function shouldComponentUpdate(nextProps, nextState) {
             return !this.shallowEqual(this.props, nextProps) || !this.shallowEqual(this.state, nextState);
         }
+    }, {
+        key: 'device',
+        get: function get() {
+            return _device.device;
+        }
     }]);
 
     return TcellComponent;
@@ -169,6 +176,12 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("device.js/dist/device.es");
 
 /***/ })
 /******/ ]);

@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { device } from 'device.js/dist/device.es'
 
 export class TcellComponent extends Component {
     constructor(props, state) {
         super(props, state);
         this.unMounted = false;
+    }
+
+    get device(){
+        return device;
     }
 
     componentWillUnmount() {

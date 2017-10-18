@@ -1,0 +1,8 @@
+{
+    "name": "componenthelper",
+    "version": "0.0.1",
+    "description": "Helper utility for components",
+    "keywords": ["componenthelper"],
+    "dependencies": {
+    }
+}

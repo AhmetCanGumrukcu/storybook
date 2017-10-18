@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import TextField from 'material-ui/TextField';
-import { withStyles } from 'material-ui/styles';
-import { ListItem } from 'material-ui/List';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import Checkbox from 'material-ui/Checkbox';
-import ArrowDropDownIcon from 'material-ui-icons/ArrowDropDown';
-import IconButton from 'material-ui/IconButton';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import TextField from 'material-ui/TextField'
+import { withStyles } from 'material-ui/styles'
+import { ListItem } from 'material-ui/List'
+import Menu, { MenuItem } from 'material-ui/Menu'
+import Checkbox from 'material-ui/Checkbox'
+import ArrowDropDownIcon from 'material-ui-icons/ArrowDropDown'
+import IconButton from 'material-ui/IconButton'
 import { TcellComponent } from 'tcellcomponent'
-
 import style from './style.css'
-import _ from 'lodash';
+import isArray from 'lodash/isArray'
+import isEmpty from 'lodash/isEmpty'
+import find from 'lodash/find'
 
 const styles = theme => ({
     root: {
@@ -21,126 +22,112 @@ const styles = theme => ({
 
 class ReadOnlyTextField extends Component {
     render() {
+        const { value, ...others } = this.props;
         return (
-            <TextField { ...this.props }></TextField>
+            <TextField value={ value ? value : '' } { ...others }></TextField>
         )
     };
 }
 
-
 class TcellSelectMultiple extends TcellComponent {
     constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
+        super(props);        
         this.state = {
-            anchorEl: undefined,
+            anchorEl: null,
             open: false,
-            checkedItems: {},
-            display: ''
+            checkedItems: null,
+            display: null
         };
-    }
-   
+    }   
 
-    shapeDisplay() {
+    shapeDisplay(checkedItems) { 
+        if(!checkedItems) {
+            return null;
+        }     
         let actualDisplay = "";
-        for (let key in this.state.checkedItems) {
-            actualDisplay += this.state.checkedItems[key].text;
+        for (let key in checkedItems) {
+            actualDisplay += checkedItems[key].text;
             actualDisplay += ',';
             actualDisplay += '  ';
         }
         if (actualDisplay.indexOf(',  ') > -1) {
             actualDisplay = actualDisplay.substr(0, actualDisplay.length - 3);
         }
-        this.setState({ display: actualDisplay });
+        return actualDisplay == "" ? null : actualDisplay;
     }
-    handleClick(event) {
-        this.setState({ 
-            open: true,
+
+    handleClick = (event) => {
+        this.setState({
+            open: true
+        });
+        this.setState({
             anchorEl: event.currentTarget
         });
-        
-        setTimeout(() => {
-            let oldVal = this.state.display;
-            this.setState({
-                display: ""
-            });
-            this.setState({
-                display: oldVal
-            });
-        }, 50)
-
-
     };
     handleRequestClose = () => {
-        this.setState({
-           open: false 
-        });
+        this.setState({ open: false});        
     };
     handleMenuItemClick = param => {
-        if (this.state.checkedItems[param.option.id]) {
-            delete this.state.checkedItems[param.option.id]
+        let checkedItems = this.state.checkedItems ? this.state.checkedItems : {};
+        if (checkedItems[param.option.id]) {
+            delete checkedItems[param.option.id];
         } else {
-            this.state.checkedItems[param.option.id] = param.option;
+            checkedItems[param.option.id] = param.option;
         }
-        this.shapeDisplay();
+        let display = this.shapeDisplay(checkedItems);
+        this.setState({checkedItems, display});
         let myEvent = {
             target: {
                 name: this.props.name,
-                value: Object.keys(this.state.checkedItems).map((k) => this.state.checkedItems[k].id)
+                value: Object.keys(checkedItems).map((k) => checkedItems[k].id)
             }
         }
         this.props.onChange(myEvent);
     }
     setCheckedItems(dataSource, ids) {
-        let idArray = [];
-        if (_.isArray(ids)) {
-            idArray = ids;
-        } else if (!_.isEmpty(ids)) {
-            idArray.push(ids);
+        let checkedItems = null;
+        let display = null;
+        if (isArray(ids) && !isEmpty(ids)) {
+            checkedItems = {};
+            ids.forEach(id => {
+                let found = find(dataSource, (option) => option.id === id);
+                checkedItems[id] = found
+            });
+            display = this.shapeDisplay(checkedItems);
         }
-        this.setState({
-            checkedItems: {}
-        });
-        idArray.forEach(id => {
-            let found = _.find(dataSource, (option) => option.id === id);
-            this.state.checkedItems[id] = found
-        });
-        this.shapeDisplay();
+        this.setState({ checkedItems , display });
     }
-    componentWillReceiveProps(nextProps) {
+
+    componentWillReceiveProps(nextProps) {            
         if (this.props.value != nextProps.value) {
             const { dataSource } = this.props;
             const { value } = nextProps;
             this.setCheckedItems(dataSource, value)
         }
     }
+
     getChecked = id => {
-        if (this.state.checkedItems[id]) {
+        if (this.state.checkedItems && this.state.checkedItems[id]) {
             return true;
         } else {
             return false;
         }
     }
+
     componentDidMount() {     
+        const { dataSource, value } = this.props;
         const inputNode = ReactDOM.findDOMNode(this.textField);
         const inputs = inputNode.querySelectorAll('textarea');
-
-        //ipad forEach tanımıyor!!!!!
-        // try{
-        // inputs.forEach(f => alert(f));
-        // }catch(e){
-        //     alert(e);
-        // }
-
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].setAttribute('readonly', 'readonly')
         }
-
-        if (window.device.desktop()) {        
+        if (this.device.desktop) {        
             inputNode.querySelector('div').style.paddingRight = "14px";
-        }else if (window.device.android()) {
+        }else if (this.device.android) {
             inputNode.querySelector('div').style.paddingRight = "28px";
          }
+
+         this.setCheckedItems(dataSource, value)
     }
     render() {
         const { dataSource, onChange, value, classes, ...others } = this.props;

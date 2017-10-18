@@ -1,0 +1,19 @@
+[
+    {
+        "name": "tcellcheckbox",
+        "desc": "Checkbox Turkcell Component",
+        "sample": " "
+    },
+    {
+        "name": "Props",
+        "infoArray" : [
+           
+        ]
+    },
+    {
+        "name": "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

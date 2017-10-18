@@ -1,0 +1,9 @@
+{
+    "name":"tcellradiogroup",
+    "version": "0.0.1",
+    "description": "Turkcell radiogroup bileşeni.",
+    "keywords": "radiogroup",
+    "dependencies": {       
+        "tcellcomponent" : "^0.0.1"       
+    }
+}

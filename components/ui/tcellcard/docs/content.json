@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellCard",
+        "desc": "Input Base Turkcell Component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

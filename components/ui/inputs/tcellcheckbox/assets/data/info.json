@@ -1,0 +1,9 @@
+{
+    "name":"tcellcheckbox",
+    "version": "0.0.1",
+    "description": "Turkcell checkbox bileşeni.",
+    "keywords": "checkbox",
+    "dependencies": {       
+        "tcellcomponent" : "^0.0.1"       
+    }
+}

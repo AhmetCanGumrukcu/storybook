@@ -89,7 +89,9 @@ export default function Build(options) {
         let dependencyMap = initDependecyMap();
         var namesArr = cmpOptions.components.split(",").map(function(value) {return value.toLowerCase();});
         for(var i= 0; i < namesArr.length; i++) {
-            promises.push(path.dirname(dependencyMap[namesArr[i]].path));
+            if(dependencyMap[namesArr[i]]) {
+                promises.push(path.dirname(dependencyMap[namesArr[i]].path));
+            }
         }
         if(promises.length>0){ 
            return runpromise(promises,0,cmpOptions.concurrentPromise); 
