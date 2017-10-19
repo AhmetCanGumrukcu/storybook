@@ -1,0 +1,9 @@
+{
+    "name": "tcellappbar",
+    "version": "0.0.1",
+    "description": "Turkcell app bar bileşeni.",
+    "keywords": "input,base",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}

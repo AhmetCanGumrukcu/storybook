@@ -19,7 +19,7 @@
         {"src": "./components/ui/tcellcard", "expose": "tcellcard"},
         {"src": "./components/ui/tcelldialog", "expose": "tcelldialog"},
         {"src": "./components/ui/tcelldatetimepicker", "expose": "tcelldatetimepicker"},
-        {"src": "./components/utils/componenthelper", "expose": "componenthelper"}            
+        {"src": "./components/ui/layout/tcellappbar", "expose": "tcellappbar"}
       ]
     ]
   ]

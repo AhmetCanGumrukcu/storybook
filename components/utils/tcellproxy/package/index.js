@@ -86,138 +86,148 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var IProxy = exports.IProxy = function () {
-    function IProxy() {
-        _classCallCheck(this, IProxy);
-    }
-
-    _createClass(IProxy, [{
-        key: "_serviceCall",
-        value: function _serviceCall(request) {
-            var result = this.serviceCall ? this.serviceCall(request) : null;
-            if (!result) {
-                result = Promise.resolve({});
-            }
-            return result;
-        }
-    }, {
-        key: "_callBase",
-        value: function _callBase(request) {
-            if (typeof request === "string") {
-                request = { servicePath: request };
-            }
-            var result = this._serviceCall(request);
-            return result;
-        }
-    }]);
-
-    return IProxy;
-}();
-
-var ServiceProxy = exports.ServiceProxy = function (_IProxy) {
-    _inherits(ServiceProxy, _IProxy);
-
-    function ServiceProxy(baseUrl) {
+var ServiceProxy = function () {
+    function ServiceProxy(rootHost, baseUrl, username, secretKey, accesstoken, refreshtoken, oauthServiceUrl) {
         _classCallCheck(this, ServiceProxy);
 
-        var _this = _possibleConstructorReturn(this, (ServiceProxy.__proto__ || Object.getPrototypeOf(ServiceProxy)).call(this));
-
-        _this.baseUrl = baseUrl;
-        return _this;
+        this.rootHost = rootHost;
+        this.baseUrl = baseUrl;
+        this.username = username;
+        this.secretKey = secretKey;
+        this.accesstoken = accesstoken;
+        this.refreshtoken = refreshtoken;
+        this.oauthServiceUrl = oauthServiceUrl;
     }
 
     _createClass(ServiceProxy, [{
-        key: "call",
-        value: function call(request) {
-            return this._callBase(request);
+        key: "renewRequest",
+        value: function renewRequest(url, type, data, identifier, contentType) {
+            return $.ajax({
+                url: url,
+                type: type,
+                dataType: 'json',
+                cache: false,
+                contentType: contentType,
+                headers: {
+                    "Authorization": "Bearer " + this.accesstoken,
+                    "Tidentifier": identifier,
+                    "Culture": window["culture"]
+                },
+                data: data
+            });
         }
     }, {
-        key: "getBaseUrl",
-        value: function getBaseUrl(request) {
-            var baseUrl = request.baseUrl || this.baseUrl;
-            return baseUrl ? baseUrl.replace(/[\/\s]+$/, "") + "/" : "";
+        key: "refreshRequest",
+        value: function refreshRequest() {
+            var _this = this;
+
+            return $.ajax({
+                url: this.oauthServiceUrl + "/Token",
+                type: "POST",
+                crossDomain: true,
+                cache: false,
+                data: 'grant_type=refresh_token&refresh_token=' + this.refreshtoken + '&secretKey=' + this.secretKey + '&userName=' + this.username,
+                headers: {
+                    "Content-Type": 'application/x-www-form-urlencoded'
+                }
+            });
+            promise.done(function (response) {
+                _this.accesstoken = response.access_token;
+                resolve(response);
+            });
+            promise.fail(function (jqXhr, textStatus, errorThrown) {
+                reject(errorThrown);
+            });
         }
     }, {
         key: "serviceCall",
-        value: function serviceCall(request) {
-            var baseUrl = this.getBaseUrl(request);
-            var url = baseUrl + request.servicePath;
-            var requestString = JSON.stringify(request.data);
-            var requestObj = {
-                url: url,
-                data: requestString,
-                type: request.method || "GET",
-                timeout: request.timeout ? request.timeout : 30000,
-                crossDomain: true,
-                cache: false,
-                processData: false,
-                dataType: request.dataType || "json",
-                headers: request.headers
-            };
+        value: function serviceCall(path, type, data, identifier, useAbsolutePath) {
+            var _this2 = this;
 
-            var promise = $.ajax(requestObj);
-            return promise;
+            var dataType = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'json';
+            var timeout = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+
+            return new Promise(function (resolve, reject) {
+                var url = useAbsolutePath ? path : _this2.baseUrl + path;
+                var contentType = "application/json; charset=utf-8";
+                var requestString = JSON.stringify(data);
+                var promise = $.ajax({
+                    url: url,
+                    type: type,
+                    dataType: dataType,
+                    cache: false,
+                    contentType: contentType,
+                    timeout: timeout,
+                    crossDomain: true,
+                    headers: {
+                        "Authorization": "Bearer " + _this2.accesstoken,
+                        "Tidentifier": identifier,
+                        "Culture": window["culture"]
+                    },
+                    data: requestString
+                });
+                promise.done(function (response) {
+                    resolve(response);
+                });
+                promise.fail(function (jqXhr, textStatus, errorThrown) {
+                    if (jqXhr.status == 400 && jqXhr.responseJSON !== undefined) {
+                        if (jqXhr.responseJSON.Message === 'RefreshRequired') {
+                            var refreshPromise = _this2.refreshRequest();
+                            refreshPromise.done(function (response) {
+                                _this2.accesstoken = response.access_token;
+                                var retryPromise = _this2.renewRequest(url, type, data, identifier, contentType);
+                                retryPromise.done(function (response) {
+                                    resolve(response);
+                                });
+                                retryPromise.fail(function (jqXhrRetry, textStatusRetry, errorThrownRetry) {
+                                    reject(errorThrownRetry);
+                                });
+                            });
+                            refreshPromise.fail(function (jqXhrRefresh, textStatusRefresh, errorThrownRefresh) {
+                                reject(errorThrownRefresh);
+                            });
+                        } else if (jqXhr.responseJSON.Message === CommonResources.Spa.Dictionary.UnAuthorizedResponse) {
+                            reject(errorThrown);
+                        }
+                    } else {
+                        reject(errorThrown);
+                    }
+                });
+            });
         }
     }]);
 
     return ServiceProxy;
-}(IProxy);
+}();
 
-exports.default = ServiceProxy;
+var serviceFactory = function () {
+    function serviceFactory() {
+        _classCallCheck(this, serviceFactory);
 
-var MockProxy = exports.MockProxy = function (_IProxy2) {
-    _inherits(MockProxy, _IProxy2);
-
-    function MockProxy(mockDataDictionary) {
-        _classCallCheck(this, MockProxy);
-
-        var _this2 = _possibleConstructorReturn(this, (MockProxy.__proto__ || Object.getPrototypeOf(MockProxy)).call(this));
-
-        _this2.mockDataDictionary = mockDataDictionary;
-        return _this2;
+        this.proxyfactory = null;
     }
 
-    _createClass(MockProxy, [{
-        key: "call",
-        value: function call(request) {
-            return this._callBase(request);
+    _createClass(serviceFactory, [{
+        key: "configure",
+        value: function configure(rootHost, baseUrl, username, secretKey, accesstoken, refreshtoken, oauthServiceUrl) {
+            this.proxy = new ServiceProxy(rootHost, baseUrl, username, secretKey, accesstoken, refreshtoken, oauthServiceUrl);
         }
     }, {
-        key: "serviceCall",
-        value: function serviceCall(request) {
-            var methodName = request.servicePath;
-            var dictionary = this.mockDataDictionary;
-            var promise = new Promise(function (resolve, reject) {
-                try {
-                    var obj = null;
-                    for (var index in dictionary) {
-                        var item = dictionary[index];
-                        if (item && item.name === methodName) {
-                            obj = item.value(request.data);
-                            break;
-                        }
-                    }
-                    if (obj) {
-                        resolve(obj);
-                    } else {
-                        reject("method not found");
-                    }
-                } catch (e) {
-                    reject(e);
-                }
-            });
-            return promise;
+        key: "proxy",
+        set: function set(value) {
+            this.proxyfactory = value;
+        },
+        get: function get() {
+            return this.proxyfactory;
         }
     }]);
 
-    return MockProxy;
-}(IProxy);
+    return serviceFactory;
+}();
+
+var servicefactory = exports.servicefactory = new serviceFactory();
 
 /***/ })
 /******/ ]);

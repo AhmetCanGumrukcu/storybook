@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellAppBar",
+        "desc": "App Bar Turkcell Component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]

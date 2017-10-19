@@ -14,7 +14,7 @@ import RadioButton from './RadioButtonViewer'
 import Card from './CardViewer'
 import DialogViewer from './DialogViewer'
 import DateTimeViewer from './DateTimeViewer'
-
+import AppBarViewer from './AppBarViewer'
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import purple from 'material-ui/colors/purple'
@@ -95,4 +95,6 @@ storiesOf('Turkcell Web Components', module)
     .add('DateTime', () => (
       <DateTimeViewer />
     ))
-  
+    .add('AppBar', () => (
+      <AppBarViewer />
+    ))
