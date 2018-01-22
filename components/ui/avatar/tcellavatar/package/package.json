@@ -1,8 +1,15 @@
 {
-    "name": "tcellcomponent",
+    "name": "tcellavatar",
     "version": "0.0.1",
-    "description": "Turkcell main component bileşeni.",
-    "keywords": "component",
+    "description": "Turkcell avatar base bileşeni.",
+    "keywords": [
+        "avatar"
+    ],
+    "dependencies": {
+        "tcellcomponent": "^0.0.1",
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1"
+    },
     "files": [
         "LICENSE",
         "assets",
@@ -18,9 +25,5 @@
         "url": "http://www.turkcell.com"
     },
     "license": "Turkcell",
-    "dependencies": {
-        "react": "^15.6.1",
-        "react-dom": "^15.6.1"
-    },
     "typings": "./index.d.ts"
 }
