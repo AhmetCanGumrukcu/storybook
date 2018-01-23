@@ -64,7 +64,7 @@ class TcellSelectMultiple extends TcellComponent {
             anchorEl: event.currentTarget
         });
     };
-    handleRequestClose = () => {
+    handleClose = () => {
         this.setState({ open: false});        
     };
     handleMenuItemClick = param => {
@@ -150,8 +150,8 @@ class TcellSelectMultiple extends TcellComponent {
                 <Menu
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
-                    open={this.state.open}
-                    onRequestClose={this.handleRequestClose}
+                    open={this.state.open}                    
+                    onClose={this.handleClose}
                 >
                     {dataSource.map((option, index) =>
                         <MenuItem

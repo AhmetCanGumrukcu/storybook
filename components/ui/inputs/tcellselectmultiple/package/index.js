@@ -219,7 +219,7 @@ var TcellSelectMultiple = function (_TcellComponent) {
             });
         };
 
-        _this2.handleRequestClose = function () {
+        _this2.handleClose = function () {
             _this2.setState({ open: false });
         };
 
@@ -361,7 +361,7 @@ var TcellSelectMultiple = function (_TcellComponent) {
                         id: 'simple-menu',
                         anchorEl: this.state.anchorEl,
                         open: this.state.open,
-                        onRequestClose: this.handleRequestClose
+                        onClose: this.handleClose
                     },
                     dataSource.map(function (option, index) {
                         return _react2.default.createElement(
