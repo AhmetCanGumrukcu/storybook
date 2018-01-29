@@ -1,0 +1,9 @@
+{
+    "name": "tcellbadges",
+    "version": "0.0.1",
+    "description": "Turkcell input base bileşeni.",
+    "keywords": "input,base",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}
