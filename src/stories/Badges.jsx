@@ -10,6 +10,7 @@ import Typography from 'material-ui/Typography'
 import MenuIcon from 'material-ui-icons/Menu'
 import Button from 'material-ui/Button'
 import AccountCircle from 'material-ui-icons/AccountCircle';
+import ButtonMenu from './MenuItem';
 
 const style = {
   margin:"30px 0 0 25px",
@@ -31,6 +32,7 @@ class SimpleBadge extends React.Component{
 
     return(
       <div>
+          
           <TcellBadge  
             badgeContent={10}
             color="primary"
