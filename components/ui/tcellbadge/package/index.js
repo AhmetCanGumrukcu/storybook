@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("prop-types"), require("classnames"), require("material-ui/styles"), require("material-ui/Badge"), require("tcellcomponent"), require("material-ui-icons/Mail"), require("material-ui-icons/Voicemail"));
+		module.exports = factory(require("react"), require("prop-types"), require("classnames"), require("material-ui/styles"), require("material-ui/Badge"), require("material-ui/IconButton"), require("tcellcomponent"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "prop-types", "classnames", "material-ui/styles", "material-ui/Badge", "tcellcomponent", "material-ui-icons/Mail", "material-ui-icons/Voicemail"], factory);
+		define(["react", "prop-types", "classnames", "material-ui/styles", "material-ui/Badge", "material-ui/IconButton", "tcellcomponent"], factory);
 	else if(typeof exports === 'object')
-		exports["tcellbadges"] = factory(require("react"), require("prop-types"), require("classnames"), require("material-ui/styles"), require("material-ui/Badge"), require("tcellcomponent"), require("material-ui-icons/Mail"), require("material-ui-icons/Voicemail"));
+		exports["tcellbadge"] = factory(require("react"), require("prop-types"), require("classnames"), require("material-ui/styles"), require("material-ui/Badge"), require("material-ui/IconButton"), require("tcellcomponent"));
 	else
-		root["tcellbadges"] = factory(root["react"], root["prop-types"], root["classnames"], root["material-ui/styles"], root["material-ui/Badge"], root["tcellcomponent"], root["material-ui-icons/Mail"], root["material-ui-icons/Voicemail"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__) {
+		root["tcellbadge"] = factory(root["react"], root["prop-types"], root["classnames"], root["material-ui/styles"], root["material-ui/Badge"], root["material-ui/IconButton"], root["tcellcomponent"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -84,12 +84,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _TcellBadges = __webpack_require__(1);
+var _TcellBadge = __webpack_require__(1);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_TcellBadges).default;
+    return _interopRequireDefault(_TcellBadge).default;
   }
 });
 
@@ -128,15 +128,11 @@ var _Badge = __webpack_require__(6);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
-var _tcellcomponent = __webpack_require__(7);
+var _IconButton = __webpack_require__(7);
 
-var _Mail = __webpack_require__(8);
+var _IconButton2 = _interopRequireDefault(_IconButton);
 
-var _Mail2 = _interopRequireDefault(_Mail);
-
-var _Voicemail = __webpack_require__(9);
-
-var _Voicemail2 = _interopRequireDefault(_Voicemail);
+var _tcellcomponent = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -152,40 +148,39 @@ var styles = {
     }
 };
 
-var TcellBadges = function (_TcellComponent) {
-    _inherits(TcellBadges, _TcellComponent);
+var TcellBadge = function (_TcellComponent) {
+    _inherits(TcellBadge, _TcellComponent);
 
-    function TcellBadges() {
-        _classCallCheck(this, TcellBadges);
+    function TcellBadge() {
+        _classCallCheck(this, TcellBadge);
 
-        return _possibleConstructorReturn(this, (TcellBadges.__proto__ || Object.getPrototypeOf(TcellBadges)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (TcellBadge.__proto__ || Object.getPrototypeOf(TcellBadge)).call(this));
     }
 
-    _createClass(TcellBadges, [{
+    _createClass(TcellBadge, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                _Badge2.default,
-                _extends({ style: styles.badge }, this.props),
-                _react2.default.createElement(_Mail2.default, null)
+                _IconButton2.default,
+                null,
+                _react2.default.createElement(_Badge2.default, _extends({ style: styles.badge }, this.props))
             );
         }
     }]);
 
-    return TcellBadges;
+    return TcellBadge;
 }(_tcellcomponent.TcellComponent);
 
-TcellBadges.propTypes = {
-    badgeContent: _propTypes2.default.string,
-    color: _propTypes2.default.strig
+TcellBadge.propTypes = {
+    badgeContent: _propTypes2.default.number,
+    onClick: _propTypes2.default.func
 };
 
-TcellBadges.defaultProps = {
-    badgeContent: 4,
+TcellBadge.defaultProps = {
     color: "primary"
 };
 
-exports.default = (0, _styles.withStyles)(styles)(TcellBadges);
+exports.default = (0, _styles.withStyles)(styles)(TcellBadge);
 
 /***/ }),
 /* 2 */
@@ -221,19 +216,13 @@ module.exports = require("material-ui/Badge");
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("tcellcomponent");
+module.exports = require("material-ui/IconButton");
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = require("material-ui-icons/Mail");
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("material-ui-icons/Voicemail");
+module.exports = require("tcellcomponent");
 
 /***/ })
 /******/ ]);

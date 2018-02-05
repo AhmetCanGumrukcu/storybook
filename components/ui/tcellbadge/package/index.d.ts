@@ -1,4 +1,4 @@
 import { Component } from 'react'
-    declare module 'tcellbadges' {
+    declare module 'tcellbadge' {
 }
 

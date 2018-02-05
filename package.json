@@ -10,7 +10,7 @@
     "fullbuild": "babel-node build/main.js --fullBuild --concurrentPromise=10",
     "build-base": "babel-node build/main.js --base",
     "build-theme": "babel-node build/main.js --theme",
-    "componentbuild": "babel-node build/main.js --components=tcellbadges",
+    "componentbuild": "babel-node build/main.js --components=tcellbadge",
     "componentbuilddebug": "babel-node --inspect --debug-brk build/main.js --components=tcelldatetimepicker"
   },
   "keywords": [

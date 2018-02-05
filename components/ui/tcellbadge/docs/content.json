@@ -1,7 +1,7 @@
 [
     {
-        "name": "TcellBadges",
-        "desc": "Input Base Turkcell Component",
+        "name": "TcellBadge",
+        "desc": "TcellBadge Turkcell Component",
         "sample": ""
     },
     {

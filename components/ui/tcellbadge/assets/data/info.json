@@ -1,0 +1,9 @@
+{
+    "name": "tcellbadge",
+    "version": "0.0.1",
+    "description": "TcellBadge base bileşeni.",
+    "keywords": "badge",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}
