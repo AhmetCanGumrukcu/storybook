@@ -16,6 +16,7 @@ import DialogViewer from './DialogViewer'
 import DateTimeViewer from './DateTimeViewer'
 import AppBarViewer from './AppBarViewer'
 import SimpleBadge from './Badges'
+import ButtonMenu from './PopupMenu'
 
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
@@ -102,4 +103,7 @@ storiesOf('Turkcell Web Components', module)
     ))
     .add('SimpleBadge', () => (
       <SimpleBadge />
+    ))
+    .add('ButtonMenu', () => (
+      <ButtonMenu />
     ))

@@ -1,0 +1,9 @@
+{
+    "name": "tcellpopupmenu",
+    "version": "0.0.1",
+    "description": "TcellPopupMenu base bileşeni.",
+    "keywords": "popup menu",
+    "dependencies": {       
+        "tcellcomponent": "^0.0.1"       
+    }
+}

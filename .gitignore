@@ -5,3 +5,4 @@ tools/gittools
 tools/kendo
 tools/loaders
 tools/vorlon
+src/stories/menuItem.jsx

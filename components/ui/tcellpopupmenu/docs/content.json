@@ -1,0 +1,19 @@
+[
+    {
+        "name": "TcellPopupMenu",
+        "desc": "TcellPopupMenu Turkcell Component",
+        "sample": ""
+    },
+    {
+        "name" : "Props",
+        "infoArray" : [ 
+           
+        ]
+    },
+    {
+        "name" : "Events",
+        "infoArray" : [ 
+           
+        ]
+    }
+]
